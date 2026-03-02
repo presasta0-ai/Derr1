@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0000">
+<title>⚠️ SYSTEM ERROR</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+:root {
+  --red: #ff0033;
+  --orange: #ff6600;
+  --yellow: #ffcc00;
+  --dark: #0a0000;
+  --mono: 'Share Tech Mono', monospace;
+  --orb: 'Orbitron', monospace;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+}
+
+body {
+  background: var(--dark);
+  color: var(--red);
+  font-family: var(--mono);
+  overflow: hidden;
+  cursor: none;
+  /* Fill entire screen including notch area */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Scanlines overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Glitch flicker */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255,0,0,0.02);
+  animation: flicker 0.1s infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.95; }
+  75% { opacity: 0.98; }
+}
+
+/* ===== SCREEN 1: RANSOMWARE ===== */
+#screen-ransomware {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.top-bar {
+  background: var(--red);
+  color: #000;
+  font-family: var(--orb);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 3px;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.blink { animation: blink 0.8s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 16px;
+  overflow-y: auto;
+  gap: 16px;
+}
+
+.skull {
+  font-size: 64px;
+  animation: pulse-skull 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px #ff0033);
+}
+
+@keyframes pulse-skull {
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff0033); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 35px #ff0033) drop-shadow(0 0 60px #ff6600); }
+}
+
+.ransom-title {
+  font-family: var(--orb);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--red);
+  text-align: center;
+  letter-spacing: 2px;
+  animation: glitch-text 3s infinite;
+}
+
+@keyframes glitch-text {
+  0%,90%,100% { text-shadow: 0 0 10px #ff0033; transform: translate(0); }
+  91% { transform: translate(-3px, 1px); text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff; }
+  93% { transform: translate(3px, -1px); text-shadow: -3px 0 #00ffff, 3px 0 #ff00ff; }
+  95% { transform: translate(0); }
+}
+
+.warning-box {
+  border: 1px solid var(--red);
+  background: rgba(255,0,0,0.05);
+  padding: 14px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.warning-box::before {
+  content: '[ WARNING ]';
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: var(--dark);
+  padding: 0 6px;
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 2px;
+}
+
+.warning-text {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #ff9999;
+}
+
+.warning-text span { color: var(--yellow); font-weight: bold; }
+.warning-text .red { color: var(--red); }
+
+/* Timer */
+.timer-section {
+  text-align: center;
+  width: 100%;
+}
+
+.timer-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.timer-display {
+  font-family: var(--orb);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px #ff0033, 0 0 40px #ff0033;
+  animation: timer-pulse 1s step-end infinite;
+}
+
+@keyframes timer-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Encrypt progress */
+.encrypt-section { width: 100%; max-width: 400px; }
+
+.file-item {
+  font-size: 11px;
+  color: #ff6666;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.file-item .done { color: var(--red); }
+.file-bar {
+  height: 2px;
+  background: rgba(255,0,0,0.15);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.file-bar-fill {
+  height: 100%;
+  background: var(--red);
+  width: 0%;
+  transition: width 2s linear;
+  box-shadow: 0 0 6px #ff0033;
+}
+
+/* Input section */
+.input-section {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255,0,0,0.3);
+  padding: 14px;
+  background: rgba(0,0,0,0.5);
+}
+
+.input-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--orange);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.key-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.key-input {
+  flex: 1;
+  background: #000;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 10px;
+  outline: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.key-input::placeholder { color: rgba(255,0,51,0.3); }
+
+.decrypt-btn {
+  background: var(--red);
+  color: #000;
+  border: none;
+  font-family: var(--orb);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 10px 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+.decrypt-btn:active { background: #cc0029; }
+
+.error-msg {
+  font-size: 11px;
+  color: var(--orange);
+  margin-top: 8px;
+  min-height: 16px;
+}
+
+/* Scrolling log */
+.log-box {
+  width: 100%;
+  max-width: 400px;
+  height: 80px;
+  overflow: hidden;
+  border: 1px solid rgba(255,0,0,0.2);
+  padding: 6px 10px;
+  font-size: 10px;
+  color: rgba(255,100,100,0.6);
+  line-height: 1.6;
+  position: relative;
+}
+
+/* ===== SCREEN 2: BSOD ===== */
+#screen-bsod {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #0000AA;
+  color: #AAAAAA;
+  font-family: var(--mono);
+  padding: 40px 30px;
+  overflow: hidden;
+}
+
+.bsod-inner { max-width: 600px; margin: 0 auto; }
+.bsod-header { background: #AAAAAA; color: #0000AA; padding: 4px 8px; font-size: 14px; margin-bottom: 20px; }
+.bsod-title { color: white; font-size: 16px; margin-bottom: 16px; line-height: 1.6; }
+.bsod-body { font-size: 12px; line-height: 1.8; color: #AAAAAA; }
+.bsod-body p { margin-bottom: 10px; }
+.bsod-body span { color: white; }
+.bsod-progress { margin-top: 24px; font-size: 14px; color: white; }
+.bsod-pct { font-size: 20px; color: white; }
+
+/* ===== SCREEN 3: FAKE UPDATE ===== */
+#screen-update {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.update-logo { font-size: 60px; }
+.update-title { font-size: 28px; font-weight: 300; letter-spacing: -0.5px; }
+.update-sub { font-size: 14px; opacity: 0.5; }
+.update-spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.update-progress-bar {
+  width: 200px; height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.update-fill {
+  height: 100%;
+  background: white;
+  width: 0%;
+  transition: width 0.5s ease;
+  border-radius: 2px;
+}
+.update-pct { font-size: 13px; opacity: 0.5; }
+
+/* ===== PRANK REVEAL ===== */
+#prank-reveal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #00c853, #64dd17);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  text-align: center;
+  padding: 40px;
+  color: white;
+}
+
+#prank-reveal.show { display: flex; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes popIn {
+  from { opacity:0; transform: scale(0.5) rotate(-5deg); }
+  to { opacity:1; transform: scale(1) rotate(0deg); }
+}
+
+.reveal-emoji { font-size: 80px; animation: bounce 0.7s ease infinite alternate; }
+@keyframes bounce { from { transform: translateY(0) rotate(-5deg); } to { transform: translateY(-20px) rotate(5deg); } }
+.reveal-title { font-family: var(--orb); font-size: 32px; font-weight: 900; margin: 16px 0 8px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.reveal-sub { font-size: 16px; opacity: 0.9; line-height: 1.6; margin-bottom: 32px; }
+.reveal-by { font-size: 13px; opacity: 0.7; margin-bottom: 24px; }
+
+.reveal-btn {
+  background: white;
+  color: #00c853;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--orb);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  transition: transform 0.15s;
+}
+.reveal-btn:active { transform: scale(0.95); }
+
+/* Mode selector */
+#mode-selector {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.mode-btn {
+  background: rgba(255,0,51,0.15);
+  border: 1px solid rgba(255,0,51,0.4);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.mode-btn:hover, .mode-btn.active { background: rgba(255,0,51,0.3); }
+.mode-btn-label { font-size: 9px; color: rgba(255,0,51,0.5); text-align: right; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- INVISIBLE FULLSCREEN BUTTON — covers entire screen, disappears after first tap -->
+<button id="fs-btn" onclick="activateFullscreen()" style="
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99998;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+"></button>
+
+<!-- MODE SWITCHER (hidden, long press corner) -->
+<div id="mode-selector" style="display:none;">
+  <div class="mode-btn-label">PILIH PRANK</div>
+  <button class="mode-btn active" onclick="setMode('ransomware')">💀 RANSOMWARE</button>
+  <button class="mode-btn" onclick="setMode('bsod')">🔵 BLUE SCREEN</button>
+  <button class="mode-btn" onclick="setMode('update')">⚙️ FAKE UPDATE</button>
+</div>
+
+<!-- ===== SCREEN 1: RANSOMWARE ===== -->
+<div id="screen-ransomware">
+  <div class="top-bar">
+    <span>⚠ CRITICAL SYSTEM ALERT</span>
+    <span class="blink">● LIVE</span>
+  </div>
+
+  <div class="main-content">
+    <div class="skull">💀</div>
+    <div class="ransom-title">YOUR FILES ARE ENCRYPTED</div>
+
+    <div class="warning-box">
+      <div class="warning-text">
+        Semua file di perangkat ini telah <span>TERENKRIPSI</span> menggunakan algoritma <span>AES-256</span>.<br><br>
+        <span class="red">Foto, video, kontak, dan data WhatsApp</span> kamu tidak bisa diakses.<br><br>
+        Untuk mendapatkan <span>DECRYPTION KEY</span>, kirim tebusan dalam waktu:
+      </div>
+    </div>
+
+    <div class="warning-box" style="border-color: #ffcc00; background: rgba(255,204,0,0.05);">
+      <div style="position:absolute; top:-8px; left:12px; background:var(--dark); padding:0 6px; font-size:10px; color:#ffcc00; letter-spacing:2px;">[ INSTRUKSI PEMBAYARAN ]</div>
+      <div class="warning-text" style="text-align:center;">
+        <div style="font-size:28px; margin-bottom:8px;">₿</div>
+        <div style="font-size:22px; font-family:var(--orb); color:#ffcc00; letter-spacing:2px; margin-bottom:6px;">1 BITCOIN</div>
+        <div style="font-size:10px; color:#ff9999; margin-bottom:12px;">≈ Rp 1.600.000.000</div>
+        <div style="font-size:10px; color:#ff9999; letter-spacing:1px; margin-bottom:6px;">KIRIM KE NOMOR WHATSAPP:</div>
+        <div style="font-size:18px; color:#ffcc00; font-family:var(--orb); letter-spacing:3px; margin-bottom:10px;">+62 823-1353-1344</div>
+        <div style="font-size:10px; color:rgba(255,153,153,0.6); line-height:1.6;">Setelah pembayaran dikonfirmasi,<br>decryption key akan dikirim via WhatsApp.<br><span style="color:var(--red);">⚠ Jangan hubungi polisi.</span></div>
+      </div>
+    </div>
+
+    <div class="timer-section">
+      <div class="timer-label">⏳ Waktu tersisa sebelum data dihapus permanent</div>
+      <div class="timer-display" id="timer">23:59:59</div>
+    </div>
+
+    <div class="encrypt-section">
+      <div class="file-item"><span>/storage/DCIM/Photos</span><span class="done">ENCRYPTED ✓</span></div>
+      <div class="file-bar"><div class="file-bar-fill" id="bar1"></div></div>
+      <div class="file-item"><span>/storage/WhatsApp/Media</span><span class="done">ENCRYPTED ✓</span></div>
+      <div class="file-bar"><div class="file-bar-fill" id="bar2"></div></div>
+      <div class="file-item"><span>/storage/Documents</span><span class="done">ENCRYPTED ✓</span></div>
+      <div class="file-bar"><div class="file-bar-fill" id="bar3"></div></div>
+    </div>
+
+    <div class="input-section">
+      <div class="input-label">🔑 Masukkan Decryption Key</div>
+      <div class="key-input-row">
+        <input class="key-input" id="keyInput" type="text" placeholder="XXXX-XXXX-XXXX" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="decrypt-btn" onclick="tryDecrypt()">DECRYPT</button>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+
+    <div class="log-box" id="logBox"></div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 2: BSOD ===== -->
+<div id="screen-bsod">
+  <div class="bsod-inner">
+    <div class="bsod-header">Windows</div>
+    <div class="bsod-title">
+      A problem has been detected and Windows has been shut down to prevent damage to your computer.<br><br>
+      <strong style="color:white">RANSOMWARE_DETECTED_CRITICAL_ERROR</strong>
+    </div>
+    <div class="bsod-body">
+      <p>If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
+      <p>Check to make sure any new hardware or software is properly installed. If this is a new installation, ask your hardware or software manufacturer for any Windows updates you might need.</p>
+      <p>If problems continue, disable or remove any newly installed hardware or software. Disable BIOS memory options such as caching or shadowing. If you need to use Safe Mode to remove or disable components, restart your computer, press F8 to select Advanced Startup Options, and then select Safe Mode.</p>
+      <p>Technical information:</p>
+      <p><span>*** STOP: 0x000000ED (0x80F128D0, 0xC000009C, 0x00000000, 0x00000000)</span></p>
+      <p>Beginning dump of physical memory...<br>Physical memory dump complete.</p>
+    </div>
+    <div class="bsod-progress">
+      <div id="bsod-pct" class="bsod-pct">0% complete</div>
+      <div style="margin-top:8px; font-size:12px; color:#AAAAAA">Contact your system administrator or technical support group for further assistance.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 3: FAKE UPDATE ===== -->
+<div id="screen-update">
+  <div class="update-logo">⚙️</div>
+  <div class="update-title">Updating System</div>
+  <div class="update-sub">Jangan matikan perangkat ini...</div>
+  <div class="update-spinner"></div>
+  <div class="update-progress-bar">
+    <div class="update-fill" id="update-fill"></div>
+  </div>
+  <div class="update-pct" id="update-pct">0%</div>
+  <div style="font-size:12px; opacity:0.3; margin-top:16px; font-family: monospace;">Installing security patches... please wait</div>
+</div>
+
+<!-- ===== PRANK REVEAL ===== -->
+<div id="prank-reveal">
+  <div class="reveal-emoji">😂</div>
+  <div class="reveal-title">KENA PRANK WOI!</div>
+  <div class="reveal-sub">HP kamu aman 100% kok!<br>Ini cuma prank buat ngerjain temen 🎉<br>Dibuat khusus buat kamu sama...</div>
+  <div class="reveal-by">❤️ dari DERRGANTENG</div>
+  <button class="reveal-btn" onclick="resetAll()">Hahaha Main Lagi</button>
+</div>
+
+<script>
+  // ===== FULLSCREEN =====
+  function goFullscreen() {
+    const el = document.documentElement;
+    const req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+    if (req) req.call(el).catch(() => {});
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('portrait').catch(() => {});
+    }
+  }
+
+  function activateFullscreen() {
+    goFullscreen();
+    // Remove invisible button after first tap so normal interactions work
+    const btn = document.getElementById('fs-btn');
+    if (btn) btn.remove();
+  }
+
+  // Trigger fullscreen on ANY first interaction
+  function onFirstInteraction() {
+    goFullscreen();
+    document.removeEventListener('touchstart', onFirstInteraction);
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('touchend', onFirstInteraction);
+  }
+
+  document.addEventListener('touchstart', onFirstInteraction, { passive: true });
+  document.addEventListener('touchend', onFirstInteraction, { passive: true });
+  document.addEventListener('click', onFirstInteraction);
+
+  // ===== STATE =====
+  let currentMode = 'ransomware';
+  let timerInterval, logInterval, bsodInterval, updateInterval;
+  let longPressTimer;
+
+  // ===== INIT =====
+  window.onload = () => {
+    startRansomware();
+
+    // Long press bottom-right corner to access mode switcher (for pranker)
+    document.body.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      if (t.clientX > window.innerWidth - 60 && t.clientY > window.innerHeight - 60) {
+        longPressTimer = setTimeout(() => {
+          document.getElementById('mode-selector').style.display = 'flex';
+        }, 1500);
+      }
+    });
+    document.body.addEventListener('touchend', () => clearTimeout(longPressTimer));
+    document.body.addEventListener('mousedown', e => {
+      if (e.clientX > window.innerWidth - 60 && e.clientY > window.innerHeight - 60) {
+        longPressTimer = setTimeout(() => {
+          document.getElementById('mode-selector').style.display = 'flex';
+        }, 1500);
+      }
+    });
+    document.body.addEventListener('mouseup', () => clearTimeout(longPressTimer));
+  };
+
+  // ===== MODE SETTER =====
+  function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('mode-selector').style.display = 'none';
+    clearAllIntervals();
+
+    document.getElementById('screen-ransomware').style.display = 'none';
+    document.getElementById('screen-bsod').style.display = 'none';
+    document.getElementById('screen-update').style.display = 'none';
+    document.getElementById('prank-reveal').classList.remove('show');
+
+    if (mode === 'ransomware') { document.getElementById('screen-ransomware').style.display = 'flex'; startRansomware(); }
+    else if (mode === 'bsod') { document.getElementById('screen-bsod').style.display = 'block'; startBsod(); }
+    else if (mode === 'update') { document.getElementById('screen-update').style.display = 'flex'; startUpdate(); }
+  }
+
+  function clearAllIntervals() {
+    clearInterval(timerInterval);
+    clearInterval(logInterval);
+    clearInterval(bsodInterval);
+    clearInterval(updateInterval);
+  }
+
+  // ===== RANSOMWARE =====
+  function startRansomware() {
+    // Animate bars
+    setTimeout(() => { document.getElementById('bar1').style.width = '100%'; }, 200);
+    setTimeout(() => { document.getElementById('bar2').style.width = '100%'; }, 600);
+    setTimeout(() => { document.getElementById('bar3').style.width = '100%'; }, 1000);
+
+    // Timer countdown
+    let secs = 23 * 3600 + 59 * 60 + 59;
+    timerInterval = setInterval(() => {
+      secs--;
+      if (secs < 0) secs = 86399;
+      const h = String(Math.floor(secs/3600)).padStart(2,'0');
+      const m = String(Math.floor((secs%3600)/60)).padStart(2,'0');
+      const s = String(secs%60).padStart(2,'0');
+      document.getElementById('timer').textContent = `${h}:${m}:${s}`;
+    }, 1000);
+
+    // Log messages
+    const logs = [
+      'Scanning /storage/DCIM... ENCRYPTED',
+      'Scanning /data/data/com.whatsapp... ENCRYPTED',
+      'Scanning /storage/Download... ENCRYPTED',
+      'Uploading file list to remote server...',
+      'Connection established: 185.220.101.x',
+      'Scanning /storage/Music... ENCRYPTED',
+      'RSA key exchange completed',
+      'Scanning /data/contacts.db... ENCRYPTED',
+      'Backup shadow copies: DELETED',
+      'Uploading 2.3GB data...',
+    ];
+    let li = 0;
+    const logBox = document.getElementById('logBox');
+    logInterval = setInterval(() => {
+      const line = document.createElement('div');
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${logs[li % logs.length]}`;
+      logBox.appendChild(line);
+      logBox.scrollTop = logBox.scrollHeight;
+      if (logBox.children.length > 10) logBox.removeChild(logBox.firstChild);
+      li++;
+    }, 1800);
+  }
+
+  function tryDecrypt() {
+    const val = document.getElementById('keyInput').value.trim().toUpperCase().replace(/\s/g,'');
+    const correct = 'DERRGANTENG';
+    if (val === correct) {
+      showReveal();
+    } else {
+      const msgs = [
+        '⛔ Key tidak valid. Coba lagi.',
+        '⛔ Decryption failed. Key salah!',
+        '⛔ Invalid key format.',
+        '⛔ Key tidak dikenali. Mau bayar tebusan? 😈',
+      ];
+      document.getElementById('errorMsg').textContent = msgs[Math.floor(Math.random()*msgs.length)];
+      document.getElementById('keyInput').value = '';
+      setTimeout(() => document.getElementById('errorMsg').textContent = '', 2500);
+    }
+  }
+
+  // Allow enter key
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') tryDecrypt(); });
+
+  // ===== BSOD =====
+  function startBsod() {
+    let pct = 0;
+    bsodInterval = setInterval(() => {
+      pct++;
+      document.getElementById('bsod-pct').textContent = `${pct}% complete`;
+      if (pct >= 100) {
+        clearInterval(bsodInterval);
+        setTimeout(showReveal, 1000);
+      }
+    }, 80);
+  }
+
+  // Tap BSOD to enter pw
+  document.getElementById('screen-bsod').addEventListener('click', () => {
+    const pw = prompt('Masukkan recovery key:');
+    if (pw && pw.toUpperCase().replace(/\s/g,'') === 'DERRGANTENG') showReveal();
+  });
+
+  // ===== FAKE UPDATE =====
+  function startUpdate() {
+    let pct = 0;
+    updateInterval = setInterval(() => {
+      pct += Math.random() * 0.8;
+      if (pct > 99) pct = 99;
+      document.getElementById('update-fill').style.width = pct + '%';
+      document.getElementById('update-pct').textContent = Math.floor(pct) + '%';
+    }, 400);
+
+    // Tap 5 times to enter pw
+    let taps = 0;
+    document.getElementById('screen-update').addEventListener('click', () => {
+      taps++;
+      if (taps >= 5) {
+        taps = 0;
+        const pw = prompt('Masukkan unlock key:');
+        if (pw && pw.toUpperCase().replace(/\s/g,'') === 'DERRGANTENG') showReveal();
+      }
+    });
+  }
+
+  // ===== REVEAL =====
+  function showReveal() {
+    clearAllIntervals();
+    document.getElementById('prank-reveal').classList.add('show');
+  }
+
+  function resetAll() {
+    document.getElementById('prank-reveal').classList.remove('show');
+    document.getElementById('keyInput').value = '';
+    document.getElementById('errorMsg').textContent = '';
+    setMode(currentMode);
+  }
+
+  // Prevent default behaviors
+  document.addEventListener('contextmenu', e => e.preventDefault());
+</script>
+</body>
+</html>
